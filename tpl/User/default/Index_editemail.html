@@ -1,0 +1,67 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>邮件平台</h4></div>
+          <form method="post" id="main_form" action="{weixin::U('User/Editemail/upsave')}" enctype="multipart/form-data">
+          <div class="msgWrap">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+			         <tr>
+                  <th><span class="red">*</span>邮件服务器：</th>
+                  <td><input type="text" required="" class="px" name="ht" value="{weixin:$info.ht}" tabindex="1" size="25">
+                  <span class="red">如：smtp.exmail.qq.com</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span>服务器端口：</th>
+                  <td><input type="text" required="" class="px" name="pt" value="{weixin:$info.pt}" tabindex="1" size="25">
+                  <span class="red">如：465</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span>邮箱账号：</th>
+                  <td><input type="text" required="" class="px" name="uc" value="{weixin:$info.uc}" tabindex="1" size="25">
+                  <span class="red">如：admin@dmywl.com</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span>账号昵称：</th>
+                  <td><input type="text" required="" class="px" name="un" value="{weixin:$info.un}" tabindex="1" size="25">
+                  <span class="red">如：admin</span>
+                  </td>
+                </tr>
+				        <tr>
+                  <th><span class="red">*</span>邮箱密码：</th>
+                  <td><input type="text" required="" class="px" name="pw" value="{weixin:$info.pw}" tabindex="1" size="25">
+                  <span class="red">如：xxxxxxx</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span>收件邮箱：</th>
+                  <td><input type="text" required="" class="px" name="ur" value="{weixin:$info.ur}" tabindex="1" size="25">
+                  <span class="red">接收新订单邮件</span>
+                  </td>
+                </tr>
+				        <tr>
+                  <th><span class="red">*</span>邮件平台状态：</th>
+                  <td><input type="radio" value="1" checked="checked" name="s"/>开启 <input type="radio" value="0" name="s"/>关闭
+                  </td>
+                </tr>
+              </thead>
+                <tr>
+                  <td>
+                    <input type="hidden" name="is_test" id="is_test" value="0"/> 
+                    <button type="button" onclick="$('#is_test').val(0);$('#main_form').submit();" class="btnGreen" id="saveSetting">保存</button>
+                    <button type="button" onclick="$('#is_test').val(1);$('#main_form').submit();" class="btnGreen" id="testSetting">测试</button>
+                  </td>
+                </tr>
+            </table>
+          </div>
+          </form>
+        </div>
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>	

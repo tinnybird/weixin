@@ -1,0 +1,29 @@
+<body>
+	 <!--[if lte IE 8]>  <script language="javascript">$(function (){$.browser.msie&&$("#ie9-tips").show().find("#stopSuggestA").click(function(){$("#ie9-tips").hide()})})</script><![endif]-->
+<div class="nav clearfix">
+	<div class="nav-content">
+		<h1 class="left" href="/">{weixin::C('site_name')}</h1>
+		<div class="right line-li">
+			<ul>
+				<li><a href="/" >首页</a></li>
+                <li><a href="{weixin::U('Home/Index/fc')}">功能介绍</a></li>
+                <li><a href="{weixin::U('Home/Index/common')}">客户案例</a></li>
+                <li><a href="{weixin::U('Home/Index/about')}">关于我们</a></li>
+				<if condition="$_SESSION[uid]==false">
+				<li><a href="{weixin::U('Index/login')}">登录后台</a></li>
+				<li><a href="{weixin::U('Index/reg')}" class="hover">申请试用</a></li>
+					<else/>
+                <li><a href="{weixin::U('User/Index/index')}">管理中心</a></li>
+				<li><a href="/#" onClick="Javascript:window.open('{weixin::U('System/Admin/logout')}','_blank')" >退出</a></li>
+				</if>	
+                <li <eq name="ACTION_NAME" value="help">class="menuon"</eq>><a href="{weixin::U('Home/Index/help')}">帮助中心</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="ie9-tips" class="clearfix">
+	<div id="tipsPanel">
+		<div id="tipsDesc">系统检测到您所使用的浏览器版本较低，推荐使用<a href="http://www.firefox.com.cn/download/" target="_blank">Firefox</a>或<a href="http://www.google.cn/intl/zh-CN/chrome/browser/index.html" target="_blank">Chrome</a>浏览器打开，否则将无法体验完整产品功能。</div>
+		<a id="stopSuggestA" href="javascript:;">×</a>
+	</div>
+</div>

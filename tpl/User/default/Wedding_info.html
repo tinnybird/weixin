@@ -1,0 +1,91 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>微喜帖信息列表</h4>
+  <a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a>
+ </div>
+         
+ 
+<div class="msgWrap form">
+<UL id="tags">
+              <LI class="selectTag"><A href="index.php?g=User&m=Wedding&a=info&id={weixin:$Think.get.id}">赴宴名单</A> </LI>
+              <LI><A    href="index.php?g=User&m=Wedding&a=comment&id={weixin:$Think.get.id}">收到祝福</A> </LI>
+              <div class="clr"></div>
+          </UL>
+<DIV id=tagContent> 
+<DIV class="tagContent selectTag" id="tagContent0" style="display: block;"> 
+<fieldset>
+            <ul class="cateradio">
+                <div class="msgWrap"> 
+          <form method="post"  action="" id="info" >
+          <input name="delall"  type="hidden" value="" />
+           <input name="wxid"  type="hidden" value="" />
+            <table class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+                                <thead>
+<tr>
+                                            <th> 选择</th>
+<th>姓名</th>
+<th>电话</th>
+                                                <th>赴宴人数</th>
+                                                 <th>操作</th>
+</tr></thead>
+<tbody>									                                          
+<volist name="info" id="vo">
+<tr>
+<td> <input type="checkbox" name='del_id[]' value="239" class="checkitem"></td>
+<td>{weixin:$vo.username}</td>
+<td><div class="cateimg">{weixin:$vo.telphone}</div></td>
+<td>{weixin:$vo.count}</td>
+<td class="norightborder">
+	
+	<a href="javascript:drop_confirm('您确定要删除吗?', 'index.php?g=User&m=Wedding&a=info_del&id={weixin:$vo.id}');">删除</a>
+</td>
+</tr>
+</volist>
+               
+  </table>
+     </form>
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script> 
+</div> 
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{weixin:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</ul>
+</fieldset>
+</div> 
+</div> 
+   
+        <div class="clr"></div>
+          </div>
+  
+        </div>
+   
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+  <!--底部-->
+  	</div>
+
+<include file="Public:footer"/>

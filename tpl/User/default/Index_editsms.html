@@ -1,0 +1,51 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB">
+            <h4>短信平台</h4>
+          </div>
+          <form method="post" id="main_form" action="{weixin::U('User/Editsms/upsave')}" enctype="multipart/form-data">
+          <div class="msgWrap">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+                  <th><span class="red">*</span>短信平台账号：</th>
+                  <td><input type="text" required="" class="px" name="u" value="{weixin:$info.u}" tabindex="1" size="25"><span class="red">支持平台：<a href="http://api.smsbao.com/" target="_blank">点击注册</a><a href="http://api.smsbao.com/openapi" target="_blank"><img src="{weixin::RES}/images/help.png" class="vm helpimg" title="帮助"></a></span>
+                  </td>
+                </tr>
+				        <tr>
+                  <th><span class="red">*</span>短信平台密码：</th>
+                  <td><input type="text" required="" class="px" name="p" value="{weixin:$info.p}" tabindex="1" size="25"><span class="red">短信平台密码</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span>商家手机号：</th>
+                  <td><input type="text" required="" class="px" name="t" value="{weixin:$info.t}" tabindex="1" size="25"><span class="red">接收新订单信息</span>
+                  </td>
+                </tr>
+				        <tr>
+                  <th><span class="red">*</span>短信平台状态：</th>
+                  <td>
+                    <input type="radio" value="1" <if condition="($info.s eq 1)"> checked="checked" </if> name="s"/>开启 
+                    <input type="radio" value="0" <if condition="($info.s eq 0)"> checked="checked" </if> name="s"/>关闭
+                  </td>
+                </tr>
+              </thead>
+                <tr>
+                  <td>
+                    <input type="hidden" name="is_test" id="is_test" value="0"/> 
+                    <button type="button" onclick="$('#is_test').val(0);$('#main_form').submit();" class="btnGreen" id="saveSetting">保存</button>
+                    <button type="button" onclick="$('#is_test').val(1);$('#main_form').submit();" class="btnGreen" id="testSetting">测试</button>
+                  </td>
+                </tr>
+            </table>
+          </div>
+          </form>
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>	

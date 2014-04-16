@@ -1,0 +1,107 @@
+<include file="Public:head"/>
+<script src="{weixin::RES}/js/date/WdatePicker.js"></script>  
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+         
+          <div class="cLineB">
+              <h4 class="left">当前位置：<a href="{weixin::U('Member_card/index',array('token'=>$token))}">会员卡</a> >> {weixin:$thisCard.cardname}会员管理</h4>
+                 
+              <div class="clr"></div>
+          </div>
+          <div class="cLineD">
+查询资料[仅支持按照会员卡号查询]
+	<form method="post" action="">
+		<input size="80" value="" name="searchkey" class="px">
+		<button type="submit" name="appidsubmit" value="true" class="btnGreen vm" ><strong>查询</strong></button>
+	</form>
+ </div>
+          <div class="msgWrap">
+           <div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-top:5px;">注意:在每行的输入框里可以通过输入消费金额（可以填写负数）来增减会员积分</div>
+
+         
+          <input name="delall"  type="hidden" value="del" />
+           <input name="wxid"  type="hidden" value="gh_423dwjkewad" />
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+				<TH>卡号</TH>
+				<TH>微信名</TH>
+				<TH>姓名</TH>
+        <TH>联系电话</TH>
+				<TH>QQ号码</TH> 
+        <TH>领卡时间</TH>
+        <TH>积分</TH>
+        <TH>消费总额(元)</TH>
+        <TH>消费金额(元)</TH> 
+        <TH class="norightborder">添加</TH>              
+				<TH >操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>
+
+				 <volist id="list" name="members">
+                <TR>
+                  <TD>{weixin:$list.number}</TD>
+                  <TD>{weixin:$list.wechaname}</TD>
+                  <TD>{weixin:$list.truename}</TD>
+                  <TD>{weixin:$list.tel}</TD>
+                  <TD>{weixin:$list.qq}</TD> 
+                  <TD>
+                   <if condition="$list['getcardtime'] gt 0">
+                        {weixin:$list.getcardtime|date='Y-m-d',###}
+                    <else/>
+                    无时间记录
+                    </if>                      
+                  </TD>
+                  <TD>{weixin:$list.total_score}</TD> 
+                  <TD>{weixin:$list.expensetotal}</TD> 
+ <form method="post"  action="/index.php?g=User&m=Member_card&a=memberExpense&token={weixin:$Think.get.token}&id={weixin:$thisCard.id}" >
+                  <TD>
+                  <input type="text" name="money" value="0" class="px" style="width:40px;">
+                  <input type="hidden" name="wecha_id" value="{weixin:$list.wecha_id}">
+                   </TD>
+                   <TD>  <button type="submit" style="cursor:pointer">设置</button></TD>
+</form>
+                  <TD class="norightborder">				  
+				                <a href="/index.php?g=User&m=Member_card&a=member&token={weixin:$Think.get.token}&id={weixin:$thisCard.id}&itemid={weixin:$list.id}"><strong>消费记录</strong></a>  <a href="/index.php?g=User&m=Member_card&a=signrecords&token={weixin:$Think.get.token}&id={weixin:$thisCard.id}&itemid={weixin:$list.id}"><strong>签到记录</strong></a>  <a href="javascript:drop_confirm('您确定要删除吗?', '/index.php?g=User&m=Member_card&a=member_del&token={weixin:$Think.get.token}&itemid={weixin:$list.id}&id={weixin:$thisCard.id}');"><strong>删除</strong></a> 
+                  </TD>
+                </TR>
+				</volist>
+
+
+              </TBODY>
+            </TABLE>
+          
+
+          </div>
+            
+
+ 
+ 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                <div class="pages">{weixin:$page}</div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}
+  </script>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>  

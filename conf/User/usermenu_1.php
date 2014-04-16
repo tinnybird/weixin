@@ -1,0 +1,1 @@
+<?php	return array ( 'weixin' => array ( 'Function' => '', 'Areply' => '', 'Text' => '', 'Voiceresponse' => '', ), 'web' => array ( 'Home' => '', 'Tmpls' => '', ), 'sports' => array ( 'Lottery' => '', ), ); ?>

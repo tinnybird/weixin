@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>{weixin::C('site_name')}——{weixin::C('site_title')}</title>
+<meta name="keywords" content="{weixin::C('keyword')}"/>
+<meta name="description" content="{weixin::C('content')}"/>
+<script src="{weixin::RES}/js/html5.js"></script>
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/css/index.css" media="all" />
+<script type="text/javascript" src="{weixin::RES}/js/jQuery.js"></script>
+<script type="text/javascript" src="{weixin::RES}/js/weimob-index.js"></script>
+<link rel="shortcut icon" href="{weixin::RES}/images/favicon.ico" />
+<style type="text/css">
+<!--
+.red {color: #FF0000}
+.login { color:#555555}
+.login input { 
+	padding: 5px;
+	margin-top:12px;
+	border: solid 1px #E1E1E1;
+	outline: 0;
+	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+	width: 150px;
+	box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	}
+.login input:hover,.login input:focus{ 
+	border-color: #C9C9C9; 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+	}
+.think-login{ margin-top: 36px;padding-right: 60px; border-right: 1px solid #ddd; }
+.think-login .body{ padding-top: 12px; }
+.think-login{ float: left; }
+.think-form{ padding-bottom: 36px; }
+.think-form .submit{ background: #348FD4; color: #fff; font-size: 16px; height: 30px; line-height: 21px; padding: 0 24px; vertical-align: middle; border: 0; cursor: pointer; }
+.think-form .submit:hover{ background-color: #2F81BF; }
+-->
+</style>
+</head>
+<body>
+<div class="nav clearfix">
+	<div class="nav-content">
+		<h1 class="left" href="/">{weixin::C('site_name')}</h1>
+		<div class="left city" style="padding-left:20px;">
+			<h2>全国</h2>
+							<a href="#">
+					切换城市<i class="tri4"></i>
+				</a>
+					</div>
+		<div class="right line-li">
+			<ul>
+				<li><a href="/">首页</a></li>
+                <li><a href="{weixin::U('Home/Index/fc')}">功能介绍</a></li>
+                <li><a href="{weixin::U('Home/Index/common')}">客户案例</a></li>
+                <li><a href="{weixin::U('Home/Index/about')}">关于我们</a></li>
+				<if condition="$_SESSION[uid]==false">
+				<li><a href="{weixin::U('Index/login')}" class="hover">登录后台</a></li>
+				<li><a href="{weixin::U('Index/reg')}">申请试用</a></li>
+					<else/>
+                <li><a href="{weixin::U('User/Index/index')}">管理中心</a></li>
+				<li><a href="/#" onClick="Javascript:window.open('{weixin::U('System/Admin/logout')}','_blank')" >退出</a></li>
+				</if>	
+                <li <eq name="ACTION_NAME" value="help">class="menuon"</eq>><a href="{weixin::U('Home/Index/help')}">帮助中心</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- banner -->
+<div class="banner gbanner">
+</div>
+<div class="Public-content clearfix">
+	<div class="Public" style="height:500px">
+		<h2 class="Public-h2">
+			登陆
+		</h2>
+		<div class="Public-box clearfix">
+			<div class="main">
+				<div class="abody">
+					<div class="contaier wp cf">
+						<div class="think-login">
+							<div class="head">
+							</div>
+							<DIV class="body think-form ">
+								<FORM class=login method=post action=./index.php?m=Users&amp;a=checklogin>
+									<TABLE width="970" height=320 align="center" cellspacing="15">
+										<TBODY>
+											<TR>
+												<TD width=115 rowspan="6">&nbsp;
+													
+											  </TD>
+												<TD width=413 height="21">&nbsp;
+													
+											  </TD>
+												<TD rowSpan=6 width=258>
+													<IMG alt="" src="/img/erwei_big.jpg" width=258 height=258>
+												</TD>
+												<TD rowSpan=6 width=99>&nbsp;
+													
+											  </TD>
+											</TR>
+											<TR>
+												<TD height="56">
+													用户名&nbsp;&nbsp;
+													<input class="text" type="text" name="username" />
+												</TD>
+											</TR>
+											<TR>
+												<TD height="56">
+													密　码&nbsp;&nbsp;
+													<input class="text" type="password" name="password" />
+												</TD>
+											</TR>
+											<TR>
+												<TD height="36">
+													<P>
+														<input name="submit" type="submit" class="submit" value="请审核后再登录" />
+												</TD>
+											</TR>
+											<TR>
+												<TD height="100" style="line-height:26px;">
+													<p>
+														帐号审核：
+													</p>
+													<p>
+														自助审核方法：关注右侧官方微信号
+														（右侧扫一扫）
+													</p>
+													<p>
+														在微信中输入：账号审核+注册的用户名（不含+号）如：账号审核weixin
+													</p>
+													<p>
+														人工审核方法：客服QQ：{weixin::C('site_qq')}，联系审核
+													</p>
+												</TD>
+											</TR>
+										</TBODY>
+									</TABLE>
+									</p>
+								</FORM>
+							</DIV>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+

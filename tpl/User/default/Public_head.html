@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>var SITEURL='';</script>
+<title> {weixin::C('site_title')} {weixin::C('site_name')}</title>
+<link href="{weixin::RES}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{weixin::RES}/css/stylet.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{weixin::RES}/js/jquery.min.js"></script>
+<script type="text/javascript" src="{weixin::RES}/js/main.js"></script>
+<script type="text/javascript" src="{weixin::RES}/js/common.js"></script>
+
+
+<script type="text/javascript">
+function ying(){
+	 document.getElementById('tiduser').style.display="none";
+	 document.getElementById('quit').style.display="block";
+}
+function xian(){
+	 document.getElementById('tiduser').style.display="block";
+	 document.getElementById('quit').style.display="none";
+}
+setTimeout(xian,5000);
+</script>
+</head>
+
+<body>
+<div id="herder" >
+	<div id="top">
+		<img src="{weixin::RES}/images/logo.png" />
+		<a href="/" >首页</a>
+		<a href="{weixin::U('Home/Index/fc')}" >功能介绍</a>
+		<a href="{weixin::U('Home/Index/about')}" >关于我们</a>
+		<a href="{weixin::U('User/Index/index')}" >管理中心</a>
+        <a href="{weixin::U('Home/Index/help')}" >帮助中心</a>
+		<a class="line" ></a>
+        <a href="#" class="a" id="tiduser" onmouseover="ying();" >您好：<span>{weixin:$Think.session.uname}</span></a>
+		<a href="#" class="a1" id="quit" onclick="Javascript:window.open('{weixin::U('System/Admin/logout')}')" onLoad=setTimeout("abc.style.display='none'",5000) >安全退出</a>
+	</div>
+</div>
+<div id="Frame" class="shadow">
+	<div id="nav">
+		<img src="{weixin:$wecha.headerpic}" width="50" height="50" />
+		<ul class="ul">
+			<li><strong>{weixin:$wecha.wxname}</strong><img src="{weixin::RES}/images/vip.png" /></li>
+			<li>微信号：{weixin:$wecha.weixin}</li>
+		</ul>
+		<ul class="ul2">
+			<li>VIP有效时间：<if condition="$_SESSION['viptime'] neq 0">{weixin:$thisUser.viptime|date="Y-m-d",###}<else/>vip0不限时间</if></li>
+			<li>图文自定义：{weixin:$thisUser.diynum}/{weixin:$userinfo.diynum}</li>
+		</ul>
+		<ul>
+			<li>活动创建数：{weixin:$thisUser.activitynum}/{weixin:$userinfo.activitynum}</li>
+			<li>请求数：{weixin:$thisUser.connectnum}/{weixin:$userinfo.connectnum}</li>
+		</ul>
+		<ul>
+			<li>请求数剩余：<php>echo ($userinfo['connectnum']-$_SESSION['connectnum']);</php></li>
+			<li>已使用：<php>echo $_SESSION['diynum'];</php></li>
+		</ul>
+		<ul>
+			<li>当月赠送请求数：{weixin:$userinfo.connectnum}</li>
+			<li>当月剩余请求数：<php>echo $userinfo['connectnum']-$_SESSION['connectnum'];</php></li>
+		</ul>
+	</div>
+    <div id="floatline"></div>
+	<div id="Menu">
+		<div class="top">
+        <?php
+            $MENU_NAME = '';
+            foreach ($usermenu as $k1 => $v1) {
+                if(isset($v1['data'][MODULE_NAME])){
+                    $MENU_NAME = $k1;
+                    echo '<img src="'.RES.'/images/'.str_replace('0', '00', $v1['img']).'" /><a>'.$v1['text'].'</a><span> - '.$v1['data'][MODULE_NAME]['text'].'</span>';
+                    break;
+                }
+            }
+        ?>
+        </div>
+		<div class="TwoMenu">
+        <?php
+            $i = 0;
+            foreach ($usermenu as $k1 => $v1) {
+                $i++;
+                if($k1 == 'weixin'){
+                	$tmp_url = U($v1['url'],array('token'=>$token,'id'=>session('wxid')));
+                }else{
+                	$tmp_url = U($v1['url'],array('token'=>$token));
+                }
+                echo '<a href="'.$tmp_url.'" >';
+                echo '<img src="'.RES.'/images/'.$v1['img'].'" />';
+                echo '<span>'.$v1['text'].'</span></a>';
+                echo '<div id="TwoMenu-'.str_pad($i, 2, "0", STR_PAD_LEFT).'" '.(($k1 == $MENU_NAME)?'style="display:block;"':'style="display:none;"').'><img src="'.RES.'/images/'.str_replace('0', '00', $v1['img']).'" /><a class="a">'.$v1['text'].'</a></div>';
+            }
+        ?>
+        </div>
+		<div class="ThreeMenu">
+            <div class="contab" style="display:block;">
+        <?php
+            $color_arr = array('Red','Highland','Navy','LightPurple','DarkGreen','LightBlue','Orange','Brown','LightPurple','LightRed');
+            $i=0;
+            foreach ($usermenu[$MENU_NAME]['data'] as $k2 => $v2) {
+                $i=$i%10;
+                if(in_array($k2, array('Function','editsms','editemail'))){
+                	$tmp_url = U($v2['url'],array('token'=>$token,'id'=>session('wxid')));
+                }else{
+                	$tmp_url = U($v2['url'],array('token'=>$token));
+                }
+                echo '<a href="'.$tmp_url.'" class="'.$color_arr[$i].'" ><img src="'.RES.'/images/'.$v2['img'].'" /><span>'.$v2['text'].'</span></a>';
+                $i++;
+            }
+        ?>
+            </div>
+		</div>
+	</div>
+	<div id="Content" >
+	</div>

@@ -1,0 +1,151 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{weixin::RES}/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="{weixin::RES}/js/date/WdatePicker.js"></script>
+<script>
+function setlatlng(longitude,latitude){
+	art.dialog.data('longitude', longitude);
+	art.dialog.data('latitude', latitude);
+	// 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+	// document.getElementById('aInput').value = art.dialog.data('test');
+	art.dialog.open('{weixin::U('Map/setLatLng',array('token'=>$token,'id'=>$id))}',{lock:false,title:'设置经纬度',width:600,height:400,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>微喜帖配置</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+         
+    <div class="msgWrap bgfc">
+	   <form class="form" method="post" action=""  target="_top" enctype="multipart/form-data" >	 
+		<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tbody>
+				<tr>
+					<th width="120"><span class="red">*</span>喜帖标题：</th>
+					<td><input type="text" name="title" value="{weixin:$wedding.title}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th width="120"><span class="red">*</span>关键词：</th>
+					<td><input type="text" name="keyword" value="{weixin:$wedding.keyword}" class="px" style="width:550px;"><br/> <span class="red">只能写一个关键词</span>，用户输入此关键词将会触发此活动。
+</td>
+				</tr>
+<tr>
+					<th width="120"><span class="red">*</span>喜帖封面：</th>
+					<td>
+                    	<img id="toppic" src="<if condition="$wedding['coverurl'] eq ''">http://bcs.duapp.com/baeimgs/Tnh1ROgm93.png<else/>{weixin:$wedding.coverurl}</if>" style="max-height: 100px;">
+                        <br />
+                      <input class="px"  name="coverurl" value="<if condition="$wedding['coverurl'] eq ''">http://bcs.duapp.com/baeimgs/Tnh1ROgm93.png<else/>{weixin:$wedding.coverurl}</if>"   onclick="document.getElementById('toppic').src=this.value;" style="width:550px;">	
+                   <br/>  封面默认大小720*400
+</td>
+				</tr>
+<tr>
+					<th width="120"><span class="red">*</span>开场动画：</th>
+					<td>
+                    	<img id="openpic" src="<if condition="$wedding['openpic'] eq ''">http://bcs.duapp.com/baeimgs/jNuxaj1cAj.jpg<else/>{weixin:$wedding.openpic}</if>" style="width: 180px; height: 180px;">
+                        <br />
+                      <input class="px"  name="openpic" value="<if condition="$wedding['openpic'] eq ''">http://bcs.duapp.com/baeimgs/jNuxaj1cAj.jpg<else/>{weixin:$wedding.openpic}</if>"   onclick="document.getElementById('openpic').src=this.value;" style="width:550px;">	
+                   <br/> 上传400*400左右的新郎新娘合影图,用于喜帖打开时的动画中
+</td>
+				</tr>
+<tr>
+					<th width="120"><span class="red">*</span>缩略图：</th>
+					<td>
+                    	<img id="pic" src="<if condition="$wedding['picurl'] eq ''">http://bcs.duapp.com/baeimgs/2cDQtFbl75.jpg<else/>{weixin:$wedding.picurl}</if>" style="width: 40px; height: 40px;">
+                        <br />
+                      <input class="px"  name="picurl" value="<if condition="$wedding['picurl'] eq ''">http://bcs.duapp.com/baeimgs/2cDQtFbl75.jpg<else/>{weixin:$wedding.picurl}</if>"   onclick="document.getElementById('pic').src=this.value;" style="width:550px;">	
+                   <br/> 默认40x40,显示在喜帖主页
+</td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>新郎名字：</th>
+					<td><input type="text" name="man" value="{weixin:$wedding.man}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>新娘名字：</th>
+					<td><input type="text" name="woman" value="{weixin:$wedding.woman}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+                    <input type="radio" name="who_first" value="1" <if condition="$wedding['who_first'] eq 1" >checked</if>>新郎名字在前
+                    <input type="radio" name="who_first" value="2" <if condition="$wedding['who_first'] eq 2" >checked</if>>新娘名字在前
+                    </td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>联系电话：</th>
+					<td><input type="text" name="telphone" value="{weixin:$wedding.telphone}" class="px" style="width:550px;"><br/> 如021-88888888</td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>婚宴日期：</th>
+					<td><input type="text" name="statdate" id="statdate" value="<if condition="$wedding['statdate'] neq ''">{weixin:$wedding.statdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss' })"></td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>宴席地址：</th>
+					<td><input type="text" name="address" value="{weixin:$wedding.address}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>经纬地址：</th>
+					<td>经度 <input type="text" id="longitude"  name="lng" size="14" class="px" value="{weixin:$wedding.lng}" /> 纬度 <input type="text"  name="lat" size="14" id="latitude" class="px" value="{weixin:$wedding.lat}" /> <a href="###" onclick="setlatlng($('#longitude').val(),$('#latitude').val())">在地图中查看/设置</a></td>
+				</tr>
+				<tr>
+					<th>喜帖视频：</th>
+					<td><input type="text" name="video" value="{weixin:$wedding.video}" class="px" style="width:550px;"><p>支持优酷视频地址如;http://v.youku.com/v_show/id_XNjI4ODk5NDQ4.html <br /> 腾讯fash视频地址：如http://static.video.qq.com/TPout.swf?vid=v0119s27wd5&auto=0 <br /> 也支持mp4和ogg 格式地址 http://www.w3school.com.cn/example/html5/mov_bbb.mp4 </p></td>
+				</tr>
+				<tr>
+					<th>背景音乐：</th>
+					<td>
+                    <select name="mp3url">
+					<option value="" >无背景音乐</option>
+					<option value="1.mp3" <if condition="$wedding['mp3url'] eq '1.mp3'">selected="selected"</if>>今天你要嫁给我</option>
+					<option value="2.mp3" <if condition="$wedding['mp3url'] eq '2.mp3'">selected="selected"</if>>婚礼进行曲</option>
+					<option value="3.mp3" <if condition="$wedding['mp3url'] eq '3.mp3'">selected="selected"</if>>恋爱</option>
+					<option value="4.mp3" <if condition="$wedding['mp3url'] eq '4.mp3'">selected="selected"</if>>柔美的</option>
+					<option value="5.mp3" <if condition="$wedding['mp3url'] eq '5.mp3'">selected="selected"</if>>我爱你</option>
+					<option value="6.mp3" <if condition="$wedding['mp3url'] eq '6.mp3'">selected="selected"</if>>I Wanna Be With You</option>
+					<option value="7.mp3" <if condition="$wedding['mp3url'] eq '7.mp3'">selected="selected"</if>>Nothing'S Gonna Change My Love For You</option>
+					<option value="8.mp3"  <if condition="$wedding['mp3url'] eq '8.mp3'">selected="selected"</if>>爱是喜欢你(何洁)</option>
+					<option value="9.mp3"  <if condition="$wedding['mp3url'] eq '9.mp3'">selected="selected"</if>>明天我要嫁给你了(周华健)</option>
+					<option value="10.mp3"  <if condition="$wedding['mp3url'] eq '10.mp3'">selected="selected"</if>>最重要的决定(范玮琪)</option>
+					<option value="11.mp3"  <if condition="$wedding['mp3url'] eq '11.mp3'">selected="selected"</if>>I Love You</option>
+					<option value="12.mp3"  <if condition="$wedding['mp3url'] eq '12.mp3'">selected="selected"</if>>Wake Up Call</option>
+					<option value="13.mp3"  <if condition="$wedding['mp3url'] eq '13.mp3'">selected="selected"</if>>Could This Be Love</option>
+					</select>
+                    </td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>密码：</th>
+					<td><input type="text" name="password" value="{weixin:$wedding.password}" class="px" style="width:550px;"><br/> 设置微信上查看来宾名单的验证密码</td>
+				</tr>
+				<tr>
+					<th width="120"><span class="red">*</span>想要给朋友说的话：</th>
+					<td><textarea style="width:560px;height:75px" name="word" id="word" class="px"><if condition="$wedding.word eq ''">亲爱的朋友，我要结婚了，希望能在我的婚礼上得到你的祝福，并祝愿你也幸福。<else/>{weixin:$wedding.word}</if></textarea><br/>最多填写120个字</td>
+				</tr>
+				<tr>
+					<th><span class="red">*</span>二维码图片地址：</th>
+					<td><input type="text" name="qr_code" value="{weixin:$wedding.qr_code}" class="px" style="width:550px;"><br>默认100x100,显示在喜帖底部</td>
+				</tr>
+
+				<tr>
+					<th><span class="red">*</span>底部版权：</th>
+					<td><input type="text" name="copyrite" value="{weixin:$wedding.copyrite}" class="px" style="width:550px;"><br/> 底部版权限制在二十个字以内</td>
+				</tr>
+
+
+				<th>&nbsp;</th>
+					<td>
+						<button type="submit" name="button" class="btnGreen">保存</button>
+						<a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+ 
+  
+        </div>
+         <div class="clr"></div>
+<include file="Public:footer"/>

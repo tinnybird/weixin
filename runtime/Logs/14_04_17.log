@@ -1,0 +1,25 @@
+[ 2014-04-17T05:52:10+08:00 ] 127.0.0.1 /weixin/
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000478s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000566s ]
+NOTIC: [8] Undefined index: 1 /home/david/www/weixin/app/_Core/Lib/Core/Action.class.php 第 57 行.
+NOTIC: [8] Undefined index: 1 /home/david/www/weixin/app/_Core/Lib/Core/View.class.php 第 69 行.
+NOTIC: [2] Cannot use a scalar value as an array /home/david/www/weixin/app/_Core/Lib/Core/View.class.php 第 69 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.002279s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000610s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' /home/david/www/weixin/runtime/Cache/Home/514de5e9e9b7438aab4866ac09e1eb91.php 第 33 行.
+NOTIC: [8] Undefined index: uid /home/david/www/weixin/runtime/Cache/Home/514de5e9e9b7438aab4866ac09e1eb91.php 第 33 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.003022s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029861s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.032938s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.034145s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.034688s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.034887s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002405s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.035427s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000573s ]
+
